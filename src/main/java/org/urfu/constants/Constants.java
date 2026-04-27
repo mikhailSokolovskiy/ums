@@ -11,7 +11,7 @@ public class Constants {
     private static final String TABLE_USERS = "ums.users";
     public static final String CREATE_USER = "INSERT INTO " + TABLE_USERS +
             " (id, name, email, password, created) " +
-            "VALUES (UUID_TO_BIN(?), ?, ?, ?, NOW())";
+            "VALUES (UUID_TO_BIN(?), ?, ?, ?, ?)";
     public static final String ASSIGN_ROLE = "";
 
 }

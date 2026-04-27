@@ -6,6 +6,6 @@ server:
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://host.docker.internal:3306/ums?serverTimezone=UTC&useLegacyDatetimeCode=false
+    url: jdbc:mysql://127.0.0.1:3333/ums?serverTimezone=UTC&useLegacyDatetimeCode=false
     username: root
     password: root

@@ -10,6 +10,7 @@ import org.urfu.validator.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 
 @RestController
@@ -40,16 +41,16 @@ public class Controller {
                     .body(response);
         }
 
-        repo.createUser(user);
+        UUID res = repo.createUser(user);
 
-        if (user.getId() == null) {
+        if (res == null) {
             response.put(Constants.CODE, "500");
             response.put(Constants.MESSAGE, "User has not been created — check for duplicate e-mail");
             response.put(Constants.DATA, null);
         } else {
             response.put(Constants.CODE, "201");
             response.put(Constants.MESSAGE, "User created");
-            response.put(Constants.DATA, user.getId());
+            response.put(Constants.DATA, res);
         }
 
         return ResponseEntity.ok()

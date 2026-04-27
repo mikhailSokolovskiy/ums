@@ -8,6 +8,7 @@ import org.urfu.Models.Roles;
 import org.urfu.Models.User;
 import org.urfu.constants.Constants;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -22,13 +23,14 @@ public class UserDAO implements UmsRepository {
     public UUID createUser(User user) {
         UUID userId = UUID.randomUUID();
 //        Map<String, Roles> roleMap = findAllRoles();
-        user.setId(userId);
+        int res;
         try {
-            jdbc.update(Constants.CREATE_USER,
-                    user.getId(),
+            res = jdbc.update(Constants.CREATE_USER,
+                    userId.toString(),
                     user.getName(),
                     user.getEmail(),
-                    user.getPassword());
+                    user.getPassword(),
+                    System.currentTimeMillis());
 
 //            for (Roles role : user.getRoles()) {
 //                Roles canonical = roleMap.get(role.getName().toUpperCase());
@@ -40,11 +42,12 @@ public class UserDAO implements UmsRepository {
 //                        userId.toString(),
 //                        canonical.getId().toString());
 //            }
+
         } catch (Exception e) {
             // Likely a duplicate e-mail — caller gets null as "failed" signal
             return null;
         }
-        return userId;
+        return res > 0 ? userId : null;
     }
 
 
